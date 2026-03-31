@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: 3ce0a9a1b1f77f846aec3991fa506d74
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5878230614869005303
+    second: All-Bosses-Sprites-V1_0
+  - first:
+      213: -5445981927722773228
+    second: All-Bosses-Sprites-V1_1
+  - first:
+      213: 942282065179544161
+    second: All-Bosses-Sprites-V1_2
+  - first:
+      213: 1870358392331023245
+    second: All-Bosses-Sprites-V1_3
+  - first:
+      213: -4260174355691983611
+    second: All-Bosses-Sprites-V1_4
+  - first:
+      213: -333914466695407768
+    second: All-Bosses-Sprites-V1_5
+  - first:
+      213: 6949827767966004387
+    second: All-Bosses-Sprites-V1_6
+  - first:
+      213: 8865389384341394671
+    second: All-Bosses-Sprites-V1_7
+  - first:
+      213: 410118860640869157
+    second: All-Bosses-Sprites-V1_8
+  - first:
+      213: -1026451268483204925
+    second: All-Bosses-Sprites-V1_9
+  - first:
+      213: 7277448660136269974
+    second: All-Bosses-Sprites-V1_10
+  - first:
+      213: 7948280659279059906
+    second: All-Bosses-Sprites-V1_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: All-Bosses-Sprites-V1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1087
+        width: 505
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f3d71b999ba39150800000000000000
+      internalID: 5878230614869005303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All-Bosses-Sprites-V1_1
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 1087
+        width: 506
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41513e07a4cfb64b0800000000000000
+      internalID: -5445981927722773228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All-Bosses-Sprites-V1_2
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 1087
+        width: 506
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16a8f3dbb88a31d00800000000000000
+      internalID: 942282065179544161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All-Bosses-Sprites-V1_3
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 1083
+        width: 482
+        height: 510
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d83bf895c09d4f910800000000000000
+      internalID: 1870358392331023245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All-Bosses-Sprites-V1_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 575
+        width: 477
+        height: 502
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50d20cfaef1d0e4c0800000000000000
+      internalID: -4260174355691983611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All-Bosses-Sprites-V1_5
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 575
+        width: 478
+        height: 502
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 867914bcf82bd5bf0800000000000000
+      internalID: -333914466695407768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All-Bosses-Sprites-V1_6
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 575
+        width: 478
+        height: 502
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a472cf788fb27060800000000000000
+      internalID: 6949827767966004387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All-Bosses-Sprites-V1_7
+      rect:
+        serializedVersion: 2
+        x: 1599
+        y: 575
+        width: 478
+        height: 502
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe410399ca0380b70800000000000000
+      internalID: 8865389384341394671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All-Bosses-Sprites-V1_8
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 63
+        width: 482
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52bdf2c4ee801b500800000000000000
+      internalID: 410118860640869157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All-Bosses-Sprites-V1_9
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 63
+        width: 494
+        height: 502
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c83fca720051c1f0800000000000000
+      internalID: -1026451268483204925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All-Bosses-Sprites-V1_10
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 63
+        width: 482
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6989092bff0bef460800000000000000
+      internalID: 7277448660136269974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All-Bosses-Sprites-V1_11
+      rect:
+        serializedVersion: 2
+        x: 1631
+        y: 63
+        width: 481
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cb9f67d527fd4e60800000000000000
+      internalID: 7948280659279059906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      All-Bosses-Sprites-V1_0: 5878230614869005303
+      All-Bosses-Sprites-V1_1: -5445981927722773228
+      All-Bosses-Sprites-V1_10: 7277448660136269974
+      All-Bosses-Sprites-V1_11: 7948280659279059906
+      All-Bosses-Sprites-V1_2: 942282065179544161
+      All-Bosses-Sprites-V1_3: 1870358392331023245
+      All-Bosses-Sprites-V1_4: -4260174355691983611
+      All-Bosses-Sprites-V1_5: -333914466695407768
+      All-Bosses-Sprites-V1_6: 6949827767966004387
+      All-Bosses-Sprites-V1_7: 8865389384341394671
+      All-Bosses-Sprites-V1_8: 410118860640869157
+      All-Bosses-Sprites-V1_9: -1026451268483204925
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
