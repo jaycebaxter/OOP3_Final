@@ -138,4 +138,19 @@ public class Character : MonoBehaviour
         // return a value so the game can decide if it's a game over, or update UI
         return finalHealth;
     }
+
+    public Attack[] GetAttacks()
+    {
+        return this.attackArray;
+    }
+
+    public string GetName()
+    {
+        return this.characterName;
+    }
+
+    public string GetDescription()
+    {
+        return this.description;
+    }
 }

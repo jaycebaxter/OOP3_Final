@@ -69,4 +69,14 @@ public class Item : MonoBehaviour
 
         return statBoosts;
     }
+
+    public string GetName()
+    {
+        return this.itemName;
+    }
+
+    public string GetDescription()
+    {
+        return this.description;
+    }
 }

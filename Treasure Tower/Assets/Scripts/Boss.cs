@@ -33,11 +33,18 @@ public class Boss : MonoBehaviour
     [SerializeField]
     Attack[] tileAttackArray;
 
+    // note: paired with a 2d array
+    // example: "raccoon" = {
+    // {0, 30}
+    // {31, 40}
+    // {41, 55}
+    // {56, 100} }
+    // first value is the minimum, next is the maximum
     [SerializeField]
-    Dictionary<string, int[]> attackDict;
+    Dictionary<string, int[,]> attackDict;
 
     [SerializeField]
-    Dictionary<string, int[]> tileAttackDict;
+    Dictionary<string, int[,]> tileAttackDict;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() { }
@@ -100,12 +107,13 @@ public class Boss : MonoBehaviour
 
     // basic 'AI' choosing an attack for the boss to play
     // relies on randomly generated values
-    public Attack ChooseAttack(string playerName, bool tileAttack)
+    public void ChooseAttack(string playerName, bool tileAttack)
     {
+        int randomNumber = Random.Range(0, 100);
         Attack chosenAttack;
 
         // set up the likelihood of the attacks based on player character
-        int[] attackWeights;
+        int[,] attackWeights;
         if (tileAttack)
         {
             attackWeights = this.attackDict[playerName];
@@ -115,6 +123,18 @@ public class Boss : MonoBehaviour
             attackWeights = this.tileAttackDict[playerName];
         }
 
-        return chosenAttack;
+        // might be kinda dumb, excuse me. give me a bit to figure this out
+
+        // return chosenAttack;
+    }
+
+    public string GetName()
+    {
+        return this.bossName;
+    }
+
+    public string GetDescription()
+    {
+        return this.description;
     }
 }
