@@ -651,6 +651,50 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &548430705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 548430706}
+  - component: {fileID: 548430707}
+  m_Layer: 0
+  m_Name: CharacterManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &548430706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548430705}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &548430707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548430705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e67cc986718efbd44a27cb95235108d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterManager
 --- !u!1 &966044999
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,6 +707,7 @@ GameObject:
   - component: {fileID: 966045003}
   - component: {fileID: 966045002}
   - component: {fileID: 966045001}
+  - component: {fileID: 966045004}
   m_Layer: 5
   m_Name: Bunny
   m_TagString: Untagged
@@ -733,9 +778,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: goBack
+      - m_Target: {fileID: 966045004}
+        m_TargetAssemblyTypeName: CharacterButton, Assembly-CSharp
+        m_MethodName: onCharacterClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -783,6 +828,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966044999}
   m_CullTransparentMesh: 1
+--- !u!114 &966045004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966044999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f15a4bdf571f14dacd1cab1b29720d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterButton
+  characterData: {fileID: 11400000, guid: 74096ec8d5f0c604eb2bb2cc96ba9108, type: 2}
+  characterDB: {fileID: 11400000, guid: 83adda35dd3081d4f82c049ec5776f37, type: 2}
 --- !u!1 &1129616788
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,6 +1012,7 @@ GameObject:
   - component: {fileID: 1238808015}
   - component: {fileID: 1238808014}
   - component: {fileID: 1238808017}
+  - component: {fileID: 1238808018}
   m_Layer: 5
   m_Name: Owl
   m_TagString: Untagged
@@ -1025,7 +1085,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1238808017}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: goToScene
+        m_MethodName: GoToScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1033,6 +1093,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: CharacterSelected
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1238808018}
+        m_TargetAssemblyTypeName: CharacterButton, Assembly-CSharp
+        m_MethodName: onCharacterClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1238808015
@@ -1085,6 +1157,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b43e2cfc4480d141b1431bdcdb06f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeScene
+--- !u!114 &1238808018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238808012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f15a4bdf571f14dacd1cab1b29720d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterButton
+  characterData: {fileID: 11400000, guid: 822d4f7b1d6203141bc3688df09403b6, type: 2}
+  characterDB: {fileID: 11400000, guid: 83adda35dd3081d4f82c049ec5776f37, type: 2}
 --- !u!1 &1458677135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,5 +1674,6 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 313992220}
   - {fileID: 1686427864}
+  - {fileID: 548430706}
+  - {fileID: 313992220}

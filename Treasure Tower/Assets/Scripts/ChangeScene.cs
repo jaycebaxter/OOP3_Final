@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Changes the scene
 public class ChangeScene : MonoBehaviour
 {
     private int prevScene;
@@ -10,14 +11,13 @@ public class ChangeScene : MonoBehaviour
         prevScene = SceneManager.GetActiveScene().buildIndex - 1;
     }
 
-    public void goToScene(string sceneName)
+    public void GoToScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
 
-    public void goBack()
+    public void GoBack()
     {
-
         if (prevScene < 0)
         {
             prevScene = 0;
@@ -26,7 +26,9 @@ public class ChangeScene : MonoBehaviour
         {
             SceneManager.LoadScene(prevScene);
         }
-  
 
     }
+
+
+
 }
