@@ -1,6 +1,7 @@
 using UnityEngine;
 
-//[CreateAssetMenu(fileName = "New Character")]
+[CreateAssetMenu(fileName = "New Character")]
+[System.Serializable]
 public class Character : MonoBehaviour
 {
     [SerializeField]
@@ -141,6 +142,31 @@ public class Character : MonoBehaviour
 
         // return a value so the game can decide if it's a game over, or update UI
         return finalHealth;
+    }
+
+    public int GetHealth()
+    {
+        return this.health;
+    }
+
+    public int GetMovement()
+    {
+        return this.movement;
+    }
+
+    public int GetDefense()
+    {
+        return this.defense;
+    }
+
+    public int GetAttack()
+    {
+        return this.attack;
+    }
+
+    public Sprite[] GetSprites()
+    {
+        return this.characterSprites;
     }
 
     public Attack[] GetAttacks()

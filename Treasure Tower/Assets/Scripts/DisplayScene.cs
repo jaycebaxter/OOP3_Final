@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 // Trying to make it so that depending on who the user selects,
 // load CharacterSelected scene, grab character info
@@ -7,61 +8,52 @@ using TMPro;
 
 public class DisplayScene : MonoBehaviour
 {
-    //public TextMeshProUGUI nameHolder;
-    public TextMeshPro nameHolder;
+    public TextMeshProUGUI characterName;
+    public TextMeshProUGUI characterInfo;
+    public Image characterImage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        var character = CharacterManager.instance.selectedCharacter;
-
-        if (CharacterManager.instance == null)
+        if (CharacterManager.Instance == null)
         {
             Debug.LogError("Instance is null");
-            return;
         }
 
-        if (character == null)
+        var manager = CharacterManager.Instance;
+
+        if (manager == null || manager.selectedCharacter == null)
         {
-            Debug.LogError("Character is null");
+            Debug.LogError("No character selected.");
             return;
-
         }
 
-        if (nameHolder == null)
+        var player = manager.selectedCharacter;
+
+        if (player == null)
         {
-            Debug.LogError("Name Holder is null");
+            Debug.LogError("Player is null :(");
             return;
         }
 
-        //if (character != null)
-        //{
-        //    Debug.Log("Character not null. Character Name: " + character.GetName());
+        string name = player.GetName();
+        string health = player.GetHealth().ToString();
+        string defense = player.GetDefense().ToString();
+        string movement = player.GetMovement().ToString();
+        string attack = player.GetAttack().ToString();
 
-        //    try
-        //    {
-        //        if (nameHolder.text != null)
-        //        {
-        //            nameHolder.text = character.GetName();
-        //        }
-        //        else
-        //        {
-        //            Debug.Log("Name is null :(");
-        //        }
-        //    }
-        //    catch (System.Exception err)
-        //    {
-        //        Debug.Log("Error Caught: " + err);
-        //    }
-            
+        Sprite[] playerSprites = player.GetSprites();
 
-            
-        //}
+        // Change Text
+        characterName.text = name;
+        characterInfo.text =
+            "Health: " + health
+            + "\nAttack: " + attack
+            + "Defense: " + defense
+            + "Movement: " + movement;
 
-        //else
-        //{
-        //    Debug.Log("Character is Null :(");
-        //}
+        // Change image to be character facing forward
+        characterImage.sprite = playerSprites[0];
     }
 
     // Update is called once per frame

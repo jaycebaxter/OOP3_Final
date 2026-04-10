@@ -1,56 +1,44 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine;
 
-// This script is keeping track of which character was selected
-// To work each scene needs a game object with this attached script
+// Used for data persistence 
+// 
 public class CharacterManager : MonoBehaviour
 {
-    public GameObject[] characterList;
-    public GameObject selectedCharacter;
+    public Character[] characterList;
+    public Character selectedCharacter;
 
-    public TextMeshPro characterName;
-    public TextMeshPro characterHealth;
-    public TextMeshPro characterDefense;
-    public TextMeshPro characterAttack;
-    public TextMeshPro characterMovement;
+    public static CharacterManager Instance { get; private set; }
 
-    public static CharacterManager instance { get; private set; }
-
-    public void LoadCharacterInfo()
+    public void Awake()
     {
-        
-    }
-
-
-
-
-    //// Private field that can only be accessed with getter
-    //private Character selectedCharacterPrivate;
-    //public Character selectedCharacter
-    //{
-    //    get => selectedCharacterPrivate;
-    //    set => selectedCharacterPrivate = value;
-    //}
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
-    {
-        if (instance == null)
+        // Creates instance if there isn't one
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        // Deletes game object if theres more than one instance
         else
         {
             Destroy(gameObject);
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Start()
     {
-
+        // By default selected character is the Owl
+        if (selectedCharacter == null)
+        {
+            selectedCharacter = characterList[0];
+        }
     }
+
+    public void setCharacter(Character player)
+    {
+        selectedCharacter = player;
+    }
+
+
+
 }

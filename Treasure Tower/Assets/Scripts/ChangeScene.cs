@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 // Changes the scene
 public class ChangeScene : MonoBehaviour
 {
-    private int prevScene;
+    public int prevScene;
 
-    private void Start()
+    public void Start()
     {
         prevScene = SceneManager.GetActiveScene().buildIndex - 1;
     }
