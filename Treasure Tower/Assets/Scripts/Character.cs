@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Character")]
-public class Character : ScriptableObject
+//[CreateAssetMenu(fileName = "New Character")]
+public class Character : MonoBehaviour
 {
     [SerializeField]
     private string characterName;
@@ -11,6 +11,9 @@ public class Character : ScriptableObject
 
     [SerializeField]
     private string description;
+    
+    [SerializeField]
+    private int health;
 
     [SerializeField]
     private int attack;
@@ -23,9 +26,6 @@ public class Character : ScriptableObject
 
     [SerializeField]
     private int accuracy;
-
-    [SerializeField]
-    private int health;
 
     [SerializeField]
     private Item? heldItem;
@@ -99,51 +99,49 @@ public class Character : ScriptableObject
         return heldItem;
     }
 
-    //// how far the character can move
-    //// dedicated method due to the board needing access
-    //// Mono
-    //public int GetMovementAmt()
-    //{
-    //    int movement = this.movement;
+    // how far the character can move
+    // dedicated method due to the board needing access
+    public int GetMovementAmt()
+    {
+        int movement = this.movement;
 
-    //    if (HasItem())
-    //    {
-    //        movement += this.heldItem.GetMovementBoost();
-    //    }
+        if (HasItem())
+        {
+            movement += this.heldItem.GetMovementBoost();
+        }
 
-    //    return movement;
-    //}
+        return movement;
+    }
 
-    //// sets a new health value, and returns the current health value for game update purposes
-    //// Mono
-    //public int ChangeHealth(int damage)
-    //{
-    //    int finalHealth;
-    //    // the stats, also affected by the held item (if applicable)
-    //    int[] currentStats = GetStats();
-    //    // filtering for relevant stats here
-    //    health = currentStats[3];
-    //    defense = currentStats[1];
+    // sets a new health value, and returns the current health value for game update purposes
+    public int ChangeHealth(int damage)
+    {
+        int finalHealth;
+        // the stats, also affected by the held item (if applicable)
+        int[] currentStats = GetStats();
+        // filtering for relevant stats here
+        health = currentStats[3];
+        defense = currentStats[1];
 
-    //    // modifies how much damage is dealt
-    //    // some examples: 60 (damage) / 1.6 (defense stat is 60) = 37.5
-    //    // 60 (damage) / 1,1 (defense stat is 10) = 54.5
-    //    damage = System.Convert.ToInt32(damage / ((defense + 100) / 100));
+        // modifies how much damage is dealt
+        // some examples: 60 (damage) / 1.6 (defense stat is 60) = 37.5
+        // 60 (damage) / 1,1 (defense stat is 10) = 54.5
+        damage = System.Convert.ToInt32(damage / ((defense + 100) / 100));
 
-    //    finalHealth = health - damage;
+        finalHealth = health - damage;
 
-    //    // change to 0 if health goes negative
-    //    if (finalHealth < 0)
-    //    {
-    //        finalHealth = 0;
-    //    }
+        // change to 0 if health goes negative
+        if (finalHealth < 0)
+        {
+            finalHealth = 0;
+        }
 
-    //    // update the character's health
-    //    this.health = finalHealth;
+        // update the character's health
+        this.health = finalHealth;
 
-    //    // return a value so the game can decide if it's a game over, or update UI
-    //    return finalHealth;
-    //}
+        // return a value so the game can decide if it's a game over, or update UI
+        return finalHealth;
+    }
 
     public Attack[] GetAttacks()
     {
