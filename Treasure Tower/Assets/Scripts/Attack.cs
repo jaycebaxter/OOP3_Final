@@ -13,6 +13,9 @@ public class Attack : MonoBehaviour
     int baseDamage;
 
     [SerializeField]
+    int range;
+
+    [SerializeField]
     Status? statusEffect;
 
     public string GetName()
@@ -28,6 +31,17 @@ public class Attack : MonoBehaviour
     public int GetDamage()
     {
         return this.baseDamage;
+    }
+
+    public int GetRange() 
+    {
+        return this.range;
+    }
+
+    public bool IsInRange(Vector2Int playerPos, Vector2Int bossPos)
+    {
+        int manhattan = Mathf.Abs(playerPos.x - bossPos.x) + Mathf.Abs(playerPos.y - bossPos.y);
+        return manhattan <= this.range;
     }
 
     public bool HasStatus()
