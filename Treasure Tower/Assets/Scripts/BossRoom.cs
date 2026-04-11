@@ -58,6 +58,8 @@ public class BossRoom : MonoBehaviour
         }
     }
 
+    // roomData = each tile's information
+    // roomTilemap = each tile on the grid, which will have an assigned sprite
     private TileData[,] roomData;
     private Tilemap roomTilemap;
 
@@ -76,10 +78,17 @@ public class BossRoom : MonoBehaviour
     [SerializeField]
     private int[] NumPlayableXTiles = new int[26];
 
+    // status effect for this room
+    [SerializeField]
+    private int NumStatusTiles;
+
     // the sprites
     // these are added to in the editor!
     // wip, not set up yet.
+    [SerializeField]
     private Tile[] PlayableTiles;
+
+    [SerializeField]
     private Tile[] ImpassableTiles;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -162,6 +171,7 @@ public class BossRoom : MonoBehaviour
                     roomData[x, y].SetPassable(true);
                 }
                 // WIP - status will be set at random in a sec
+                // init these under the playable tiles
                 roomData[x, y].SetStatus(null);
                 // tiles always start as not highlighted!
                 roomData[x, y].SetHighlighted(false);
