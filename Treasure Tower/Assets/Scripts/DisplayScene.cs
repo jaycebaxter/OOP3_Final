@@ -15,26 +15,21 @@ public class DisplayScene : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (CharacterManager.Instance == null)
-        {
-            Debug.LogError("Instance is null");
-        }
-
         var manager = CharacterManager.Instance;
-
-        if (manager == null || manager.selectedCharacter == null)
-        {
-            Debug.LogError("No character selected.");
-            return;
-        }
-
         var player = manager.selectedCharacter;
 
-        if (player == null)
-        {
-            Debug.LogError("Player is null :(");
-            return;
-        }
+        //Debug.Log("DISPLAY SCENE");
+        //Debug.Log("Manager Exist!");
+        //Debug.Log("Instance ID - Character Manager: " + manager.GetEntityId());
+        //Debug.Log("Character List Length: " + manager.characterList.Length);
+        //Debug.Log("Selected character: " + player.GetName());
+
+        
+
+        //foreach (var character in manager.characterList)
+        //{
+        //    Debug.Log("Character Names: " + character.GetName());
+        //}
 
         string name = player.GetName();
         string health = player.GetHealth().ToString();
@@ -49,16 +44,11 @@ public class DisplayScene : MonoBehaviour
         characterInfo.text =
             "Health: " + health
             + "\nAttack: " + attack
-            + "Defense: " + defense
-            + "Movement: " + movement;
+            + "\nDefense: " + defense
+            + "\nMovement: " + movement;
 
-        // Change image to be character facing forward
+        // Change image to be selected character facing forward
         characterImage.sprite = playerSprites[0];
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

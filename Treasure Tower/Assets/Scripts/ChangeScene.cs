@@ -20,10 +20,22 @@ public class ChangeScene : MonoBehaviour
     {
         if (prevScene < 0)
         {
-            prevScene = 0;
+            // Takes player back to character selection scene
+            prevScene = 1;
         }
         else
         {
+            foreach (var character in CharacterManager.Instance.characterList)
+            {
+                Debug.Log("Character Name - Button: " + character.GetName());
+            }
+
+            //for (int i = 0; i < CharacterManager.Instance.characterList.Length; i++)
+            //{
+            //    Debug.Log($"Index BUTTON {i}: {CharacterManager.Instance.characterList[i].GetName()}");
+            //}
+
+
             SceneManager.LoadScene(prevScene);
         }
 

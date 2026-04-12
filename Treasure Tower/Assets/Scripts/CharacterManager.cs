@@ -16,13 +16,27 @@ public class CharacterManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            // Prevents gameObjects from being deleted when a new scene is loaded
             DontDestroyOnLoad(gameObject);
+
+            Debug.Log("CHARACTER MANAGER");
+            Debug.Log("Instance ID - Character Manager: " + Instance.GetEntityId());
+            Debug.Log("Character count: " + characterList.Length);
         }
-        // Deletes game object if theres more than one instance
-        else
+        // Deletes instance if theres more than one instance
+        else if (Instance != this)
         {
+            // If the character list has characters in the list is saved
+            // Prevents character list from disappearing when reloading a prev scene
+            if (characterList != null)
+            {
+                Instance.characterList = characterList;
+            }
+
+            // Game object destoryed
             Destroy(gameObject);
         }
+
     }
 
     public void Start()
@@ -31,6 +45,7 @@ public class CharacterManager : MonoBehaviour
         if (selectedCharacter == null)
         {
             selectedCharacter = characterList[0];
+            Debug.Log("Character Selected - Manager: " + selectedCharacter.GetName());
         }
     }
 
