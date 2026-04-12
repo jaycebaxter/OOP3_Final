@@ -383,7 +383,13 @@ public class BossRoom : MonoBehaviour
             List<Vector2Int> newAffectedTiles = new List<Vector2Int>();
             this.TileAttackOnGrid = true;
 
-            // pass the allowable tiles to the tile attack handler
+            // pass the allowed tiles to the tile attack handler
+            // collect the affected tiles
+            newAffectedTiles = newTileAttack.PlaceAttack(
+                allowableLocations,
+                TopImpass + 1,
+                RoomWidth
+            );
 
             // loop through the affected tiles
             // set up the tileattack on them, as long as the tile exists
