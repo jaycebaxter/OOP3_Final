@@ -232,6 +232,8 @@ public class BossRoom : MonoBehaviour
             // now loop through each tile in the row
             for (int x = 0; x < RoomWidth; ++x)
             {
+                Debug.Log($"x: {x} y: {y}");
+                roomData[x, y] = new TileData();
                 // set up a tile
                 Tile tile;
 
