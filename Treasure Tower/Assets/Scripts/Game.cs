@@ -1,6 +1,19 @@
 using UnityEngine;
 
-public class Game
+public class Game : MonoBehaviour
 {
+    [SerializeField]
+    private Character playerCharacter;
     
+    private Movement movement = new Movement();
+
+    void Start()
+    {
+        StartTurn();
+    }
+
+    void StartTurn() {
+        int movementAmount = playerCharacter.GetMovementAmount();
+        movement.SetAllowedMoves(movementAmount);
+    }
 }
