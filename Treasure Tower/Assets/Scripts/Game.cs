@@ -4,7 +4,7 @@ public class Game : MonoBehaviour
 {
     [SerializeField]
     private Character playerCharacter;
-    
+
     private Movement movement = new Movement();
 
     void Start()
@@ -12,8 +12,9 @@ public class Game : MonoBehaviour
         StartTurn();
     }
 
-    void StartTurn() {
-        int movementAmount = playerCharacter.GetMovementAmount();
+    void StartTurn()
+    {
+        int movementAmount = playerCharacter.GetMovementAmt();
         movement.SetAllowedMoves(movementAmount);
     }
 }
