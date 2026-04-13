@@ -256,6 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1498708938}
   - component: {fileID: 1498708937}
+  - component: {fileID: 1498708939}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -291,6 +292,29 @@ Transform:
   - {fileID: 593691766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1498708939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498708936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86bb378eb2489ec8b8ae1747bfc4527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossRoom
+  NumPlayableXTiles: 0000000000000000060000000600000008000000080000000a0000000a0000000c0000000c0000000c0000001000000010000000100000000c0000000c0000000c0000000a0000000a00000008000000080000000600000006000000000000000000000000000000
+  NumStatusTiles: 10
+  PlayableTiles:
+  - {fileID: 11400000, guid: 2cf12a12e614a5dcb97253a332239504, type: 2}
+  - {fileID: 11400000, guid: 37bdecaea1ebe657da636e2c378de2b2, type: 2}
+  - {fileID: 11400000, guid: 1a3d39fe7445c65089e33ff48acc62bf, type: 2}
+  - {fileID: 11400000, guid: 3ebf0000eeda5889ea7a6bb911740c8e, type: 2}
+  - {fileID: 11400000, guid: 205d8bd3a0ecce6938857ceba9d79792, type: 2}
+  - {fileID: 11400000, guid: c614ad5689630b691837be604199eb50, type: 2}
+  ImpassableTiles:
+  - {fileID: 11400000, guid: 8d2a2c2ea4b25acaeb35c3b894ebec19, type: 2}
 --- !u!1 &1561326717
 GameObject:
   m_ObjectHideFlags: 0

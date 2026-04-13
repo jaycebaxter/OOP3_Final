@@ -166,8 +166,8 @@ public class BossRoom : MonoBehaviour
     void Start()
     {
         // commented out until testing is ready
-        // GenerateFixedX();
-        // GenerateMap();
+        GenerateFixedX();
+        GenerateMap();
     }
 
     // Update is called once per frame
