@@ -259,7 +259,7 @@ public class BossRoom : MonoBehaviour
     // handles all of the aspects of updating the room
     // does calculations for tile attack changes
     // changes the room sprites accordingly
-    public void RefreshRoom(TileAttack? newTileAttack)
+    public void RefreshRoom(TileAttack newTileAttack = null)
     {
         // collects all playable tile locations
         // they must both be passable and not affected by a tileattack
