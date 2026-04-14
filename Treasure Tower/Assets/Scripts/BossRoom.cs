@@ -289,6 +289,7 @@ public class BossRoom : MonoBehaviour
 
         for (int y = 0; y < RoomHeight; ++y)
         {
+                
             // controls if the entire row should be impassable
             bool impassableRow = false;
             if (NumPlayableXTiles[y] == 0)
@@ -315,6 +316,12 @@ public class BossRoom : MonoBehaviour
                 leftX = NumSideImpassable;
                 rightX = RoomWidth - NumSideImpassable;
             }
+
+            
+            // debugging ignore
+            Debug.Log($"Row {y}: leftX={leftX}, rightX={rightX}, NumPlayableXTiles={NumPlayableXTiles[y]}");
+
+
 
             // now loop through each tile in the row
             for (int x = 0; x < RoomWidth; ++x)
