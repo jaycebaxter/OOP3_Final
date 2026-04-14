@@ -169,7 +169,7 @@ MonoBehaviour:
   health: 100
   attack: 10
   defense: 10
-  movement: 5
+  movement: 3
   accuracy: 10
   heldItem: {fileID: 0}
   currentStatus: {fileID: 0}

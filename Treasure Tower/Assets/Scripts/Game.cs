@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Game : MonoBehaviour
 {
@@ -37,27 +37,34 @@ public class Game : MonoBehaviour
         Vector2Int startTile = room.GetPlayerLocation();
         SnapPlayerToTile(startTile);
 
-        // debugging ignore
-        var walkable = room.GetWalkableTiles();
-        Debug.Log($"Walkable tile count: {walkable.Count}");
-
         StartPlayerTurn();
     }
 
-    void Update() {
-        if (turnManager == null) return;
-        if (!turnManager.IsPlayerTurn()) return;
-        if (hasAttackedThisTurn) return;
-        if (!turnManager.IsPlayerTurn()) return;
-        if (hasAttackedThisTurn) return;
+    void Update()
+    {
+        if (turnManager == null)
+            return;
+        if (!turnManager.IsPlayerTurn())
+            return;
+        if (hasAttackedThisTurn)
+            return;
+        if (!turnManager.IsPlayerTurn())
+            return;
+        if (hasAttackedThisTurn)
+            return;
 
         int attackIndex = -1;
-        if (Input.GetKeyDown(KeyCode.Alpha1)) attackIndex = 0;
-        else if (Input.GetKeyDown(KeyCode.Alpha2)) attackIndex = 1;
-        else if (Input.GetKeyDown(KeyCode.Alpha3)) attackIndex = 2;
-        else if (Input.GetKeyDown(KeyCode.Alpha4)) attackIndex = 3;
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            attackIndex = 0;
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            attackIndex = 1;
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            attackIndex = 2;
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+            attackIndex = 3;
 
-        if (attackIndex == -1) return;
+        if (attackIndex == -1)
+            return;
 
         Attack[] attacks = playerCharacter.GetAttacks();
         if (attackIndex >= attacks.Length)
@@ -69,7 +76,6 @@ public class Game : MonoBehaviour
         Attack selectedAttack = attacks[attackIndex];
         Vector2Int playerTile = room.GetPlayerLocation();
         Vector2Int bossTile = boss.GetGridPosition();
-
 
         if (!selectedAttack.IsInRange(playerTile, bossTile))
         {
@@ -125,12 +131,10 @@ public class Game : MonoBehaviour
         StartPlayerTurn();
     }
 
-
     public Vector2Int GetPlayerTile()
     {
         return room.GetPlayerLocation();
     }
-
 
     public bool IsTileWalkable(Vector2Int tile)
     {
@@ -139,10 +143,6 @@ public class Game : MonoBehaviour
 
     public void MovePlayerTo(Vector2Int tile)
     {
-        // remove later
-        Debug.Log($"Target tile: {tile}. Walkable list contains it: {room.GetWalkableTiles().Contains(tile)}. Total walkable: {room.GetWalkableTiles().Count}");
-        Debug.Log($"Moving to tile {tile}. Is walkable: {room.GetWalkableTiles().Contains(tile)}");
-
         room.UpdatePlayerLocation(tile.x, tile.y);
         room.RefreshRoom();
 
@@ -151,7 +151,9 @@ public class Game : MonoBehaviour
         if (damage > 0)
         {
             playerCharacter.ChangeHealth(damage);
-            Debug.Log($"Stepped on lava! Damage: {damage}. Remaining health: {playerCharacter.GetHealth()}");
+            Debug.Log(
+                $"Stepped on lava! Damage: {damage}. Remaining health: {playerCharacter.GetHealth()}"
+            );
         }
 
         if (room.TileHasStatus(tile) && !playerCharacter.HasStatus())
@@ -164,5 +166,4 @@ public class Game : MonoBehaviour
     {
         playerObject.transform.position = new Vector3(tile.x + 0.5f, tile.y + 0.5f, 0f);
     }
-
 }
