@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class Movement
 {
-    [SerializeField]
     private int remainingMovement;
 
-    [SerializeField]
-    private int movesThisTurn;
+    // Unnecessary?
+    // [SerializeField]
+    // private int movesThisTurn;
 
-    [SerializeField]
     private int allowedMoves;
 
     // Passes movement from character class in as movementAmount
@@ -17,4 +16,23 @@ public class Movement
         remainingMovement = movementAmount;
         movesThisTurn = 0;
     }
+
+    public bool TryMove() {
+        if (remainingMovement <=0) {
+            return false
+        }
+
+        remainingMovement -= 1;
+        return true;
+    }
+
+    public int GetRemainingMovement()
+    {
+        return remainingMovement;
+    }
+
+    public bool HasMovesLeft() {
+        return remainingMovement > 0;
+    }
+    
 }
