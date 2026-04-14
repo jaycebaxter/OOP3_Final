@@ -33,6 +33,54 @@ public class Boss : MonoBehaviour
     [SerializeField]
     Attack[] tileAttackArray;
 
+    [SerializeField]
+    private Vector2Int bossGridPosition;
+
+    private TurnManager turnManager;
+
+    public void Init(TurnManager tm)
+    {
+        turnManager = tm;
+        turnManager.OnTick += TurnHappened;
+
+        // transform.position = new Vector3(
+        //     bossGridPosition.x + 0.5f,
+        //     bossGridPosition.y + 0.5f,
+        //     0f);
+    }
+
+    private void OnDestroy()
+    {
+        if (turnManager != null)
+        turnManager.OnTick -= TurnHappened;
+    }
+
+    private void TurnHappened() {
+        if (turnManager.CurrentTurn == TurnManager.TurnState.BossTurn)
+        {
+            Debug.Log($"{bossName} boss turn — attacks not implemented yet.");
+        }
+    }
+
+    public Vector2Int GetGridPosition()
+    {
+        return bossGridPosition;
+    }
+
+    public int TakeDamage(int rawDamage)
+    {
+        int actualDamage = System.Convert.ToInt32(rawDamage / ((defense + 100f) / 100f));
+        health -= actualDamage;
+        if (health < 0) health = 0;
+        Debug.Log($"{bossName} took {actualDamage} damage. Remaining health: {health}");
+        return health;
+    }
+
+    public bool IsDead() { return health <= 0; }
+    public int GetHealth() { return health; }
+    public string GetName() { return bossName; }
+
+
     // note: paired with a 2d array
     // example: "raccoon" = {
     // {0, 30}
@@ -126,12 +174,9 @@ public class Boss : MonoBehaviour
         // might be kinda dumb, excuse me. give me a bit to figure this out
 
         // return chosenAttack;
+
     }
 
-    public string GetName()
-    {
-        return this.bossName;
-    }
 
     public string GetDescription()
     {

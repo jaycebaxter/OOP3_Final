@@ -18,10 +18,20 @@ public class Game : MonoBehaviour
     [SerializeField]
     private TurnManager turnManager;
 
+    [SerializeField]
+    private GameObject bossObject;
+
+    private Boss boss;
+
+    private bool hasAttackedThisTurn = false;
+
     void Start()
     {
         movement = playerObject.GetComponent<Movement>();
+        boss = bossObject.GetComponent<Boss>();
         turnManager = new TurnManager();
+
+        boss.Init(turnManager);
 
         // spawns player at start tile
         Vector2Int startTile = room.GetPlayerLocation();
@@ -34,8 +44,56 @@ public class Game : MonoBehaviour
         StartPlayerTurn();
     }
 
+    void Update() {
+        if (turnManager == null) return;
+        if (!turnManager.IsPlayerTurn()) return;
+        if (hasAttackedThisTurn) return;
+        if (!turnManager.IsPlayerTurn()) return;
+        if (hasAttackedThisTurn) return;
+
+        int attackIndex = -1;
+        if (Input.GetKeyDown(KeyCode.Alpha1)) attackIndex = 0;
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) attackIndex = 1;
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) attackIndex = 2;
+        else if (Input.GetKeyDown(KeyCode.Alpha4)) attackIndex = 3;
+
+        if (attackIndex == -1) return;
+
+        Attack[] attacks = playerCharacter.GetAttacks();
+        if (attackIndex >= attacks.Length)
+        {
+            Debug.Log($"No attack in slot {attackIndex + 1}.");
+            return;
+        }
+
+        Attack selectedAttack = attacks[attackIndex];
+        Vector2Int playerTile = room.GetPlayerLocation();
+        Vector2Int bossTile = boss.GetGridPosition();
+
+
+        if (!selectedAttack.IsInRange(playerTile, bossTile))
+        {
+            Debug.Log($"{selectedAttack.GetName()} not in range.");
+            return;
+        }
+
+        int baseDamage = selectedAttack.GetDamage();
+        float variance = Random.Range(0.8f, 1.2f);
+        int rolledDamage = Mathf.RoundToInt(baseDamage * variance);
+
+        Debug.Log($"Player used {selectedAttack.GetName()} for {rolledDamage} base damage.");
+        boss.TakeDamage(rolledDamage);
+
+        hasAttackedThisTurn = true;
+
+        // end movement and turn after attacking
+        movement.EndTurn();
+        OnMovementFinished();
+    }
+
     void StartPlayerTurn()
     {
+        hasAttackedThisTurn = false;
         room.RefreshRoom();
         movement.StartTurn(playerCharacter.GetMovementAmt());
     }
