@@ -11,6 +11,8 @@ public class TurnManager
     public TurnState CurrentTurn { get; private set; }
     private int m_TurnCount;
 
+    // public event Action OnTick;
+
     public TurnManager()
     {
         m_TurnCount = 1;

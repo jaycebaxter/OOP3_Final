@@ -171,6 +171,9 @@ public class BossRoom : MonoBehaviour
     [SerializeField]
     private Tile[] ImpassableTiles;
 
+    [SerializeField]
+    private Tile bossPlatformTile;
+
     // holds all tiles the player can walk on
     private List<Vector2Int> WalkableTiles = new List<Vector2Int>();
 
@@ -369,6 +372,58 @@ public class BossRoom : MonoBehaviour
             roomTilemap.SetTile(location, statusTile);
 
             allowedStatus.RemoveAt(index);
+        }
+
+        // Makes impassable tiles that the boss stands on
+        // X = 11 to 16
+        // Y == Down to 17
+        Vector2Int[] bossTiles = new Vector2Int[] 
+        {
+            new Vector2Int(11, 21),
+            new Vector2Int(12, 21),
+            new Vector2Int(13, 21),
+            new Vector2Int(14, 21),
+            new Vector2Int(15, 21),
+            new Vector2Int(16, 21),
+
+            new Vector2Int(11, 20),
+            new Vector2Int(12, 20),
+            new Vector2Int(13, 20),
+            new Vector2Int(14, 20),
+            new Vector2Int(15, 20),
+            new Vector2Int(16, 20),
+
+            new Vector2Int(11, 19),
+            new Vector2Int(12, 19),
+            new Vector2Int(13, 19),
+            new Vector2Int(14, 19),
+            new Vector2Int(15, 19),
+            new Vector2Int(16, 19),
+
+            new Vector2Int(11, 18),
+            new Vector2Int(12, 18),
+            new Vector2Int(13, 18),
+            new Vector2Int(14, 18),
+            new Vector2Int(15, 18),
+            new Vector2Int(16, 18),
+
+            new Vector2Int(11, 17),
+            new Vector2Int(12, 17),
+            new Vector2Int(13, 17),
+            new Vector2Int(14, 17),
+            new Vector2Int(15, 17),
+            new Vector2Int(16, 17),
+        };
+
+        foreach (Vector2Int tile in bossTiles)
+        {
+            int x = tile.x;
+            int y = tile.y;
+
+            roomData[x, y].SetPassable(false);
+            roomData[x, y].SetDefaultTile(bossPlatformTile);
+            roomTilemap.SetTile(new Vector3Int(x, y, 0), bossPlatformTile);
+            WalkableTiles.Remove(tile);
         }
     }
 
