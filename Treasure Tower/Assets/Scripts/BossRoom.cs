@@ -219,6 +219,47 @@ public class BossRoom : MonoBehaviour
         return true;
     }
 
+    // tile attack damage handling
+    // returns an int to be handled by the reducing health method on character
+    public int GetDamage(Vector2Int location)
+    {
+        int x = location.x;
+        int y = location.y;
+        int damage = 0;
+        TileData tileData = roomData[x, y];
+
+        if (tileData.HasTileAttack())
+        {
+            damage += tileData.GetTileAttack().GetDamage();
+        }
+
+        if (tileData.HasStatus())
+        {
+            // have to retrieve the script from the object first
+            Status status = GetComponent<Status>();
+            damage += status.GetDamage();
+        }
+
+        return damage;
+    }
+
+    public bool TileHasStatus(Vector2Int location)
+    {
+        int x = location.x;
+        int y = location.y;
+
+        if (roomData[x, y].HasStatus())
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public Status GetRoomStatus()
+    {
+        return GetComponent<Status>();
+    }
+
     // failsafe in case the X values are set incorrectly
     // feel free to ignore this
     void GenerateFixedX()
