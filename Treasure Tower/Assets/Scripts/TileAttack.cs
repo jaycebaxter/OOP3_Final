@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 /// Subclass of Attack used exclusively by bosses.
@@ -10,6 +11,12 @@ public class TileAttack : Attack
 {
     /// <summary>
     /// How many turns this tile attack remains active on the board.
+    /// </summary>
+    [SerializeField]
+    private int totalTileAttackLifetime;
+
+    /// <summary>
+    /// how many turns the tile attack can affect any specific tile
     /// </summary>
     [SerializeField]
     private int tileAttackLifetime;
@@ -54,11 +61,27 @@ public class TileAttack : Attack
     /// </summary>
     private string shape = "static";
 
+    /// <summary>
+    /// the visual sprite
+    /// </summary>
+    [SerializeField]
+    private Tile tile;
+
     // --- Getters ---
 
-    public int GetTileAttackDuration()
+    public Tile GetTileSprite()
+    {
+        return tile;
+    }
+
+    public int GetLifetime()
     {
         return this.tileAttackLifetime;
+    }
+
+    public int GetTotalLifetime()
+    {
+        return this.totalTileAttackLifetime;
     }
 
     public int GetInitialTilesAffected()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Status
+public class Status : MonoBehaviour
 {
     [SerializeField]
     string statusName;
@@ -14,23 +14,22 @@ public class Status
     [SerializeField]
     int baseDamage;
 
-    // return how many turns this status will last
-    public int TurnsLeft()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        return this.lifetime;
+        
     }
 
-    // reduce lifetime and return if the status should stay active
-    public bool StatusContinues()
+    // Update is called once per frame
+    void Update()
     {
-        this.lifetime -= 1;
+        
+    }
 
-        if (this.lifetime == 0)
-        {
-            return false;
-        }
-
-        return true;
+    // return how many turns this status will last
+    public int GetLifetime()
+    {
+        return this.lifetime;
     }
 
     public int GetDamage()

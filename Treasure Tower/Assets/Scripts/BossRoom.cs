@@ -13,10 +13,12 @@ public class BossRoom : MonoBehaviour
     public class TileData
     {
         private bool Passable;
-        private Status? tileStatus;
+
+        // not an object, the room holds its own script
+        private bool tileStatus = false;
 
         // controls the tile attacks on the grid
-        // lifetime dictates how long the tile attack will last
+        // lifetime dictates how long the tile attack will last on this specific tile
         private TileAttack? tileAttack;
         private int tileAttackLifetime = 0;
 
@@ -24,11 +26,27 @@ public class BossRoom : MonoBehaviour
         // tile visual highlighting so we don't inflict damage on the player yet
         private bool highlighted;
 
-        // WIP - may want to store original tile here, to make updating easier
+        // original tile sprite, wow
+        private Tile groundTile;
+
+        public Tile GetDefaultTile()
+        {
+            return groundTile;
+        }
+
+        public void SetDefaultTile(Tile newTile)
+        {
+            groundTile = newTile;
+        }
 
         public int GetLifetime()
         {
             return this.tileAttackLifetime;
+        }
+
+        public int GetCopyLifetime()
+        {
+            return this.tileAttack.GetLifetime();
         }
 
         public void SetPassable(bool isPassable)
@@ -54,16 +72,12 @@ public class BossRoom : MonoBehaviour
         // checks if the tile has a perma status (eg: lava, impassable barrier, etc)
         public bool HasStatus()
         {
-            if (this.tileStatus is null)
-            {
-                return false;
-            }
-            return true;
+            return tileStatus;
         }
 
         // sets the tile's status
         // only run on game start
-        public void SetStatus(Status? newStatus)
+        public void SetStatus(bool newStatus)
         {
             this.tileStatus = newStatus;
         }
@@ -114,15 +128,6 @@ public class BossRoom : MonoBehaviour
             this.tileAttackLifetime = 0;
             this.highlighted = false;
         }
-
-        // status needs some more specific functions, WIP
-        // func for changing the tile sprite
-        //
-        // func for BossRoom to redraw tiles
-        public Status GetStatus()
-        {
-            return this.tileStatus;
-        }
     }
 
     // roomData = each tile's information
@@ -133,7 +138,7 @@ public class BossRoom : MonoBehaviour
     // size of the board
     // static because all rooms have to fit the screen
     private int RoomHeight = 26;
-    private int RoomWidth = 26;
+    private int RoomWidth = 27;
 
     // impassable y coordinates
     // top is for the boss placement
@@ -149,6 +154,14 @@ public class BossRoom : MonoBehaviour
     [SerializeField]
     private int NumStatusTiles;
 
+    // holds the tile sprite for the perma status tiles
+    [SerializeField]
+    private Tile statusTile;
+
+    // the tile attack's total lifetime
+    // allows boss to make a tile attack next turn if it's 0
+    private int totalTileAttackLifetime = 0;
+
     // the sprites
     // these are added to in the editor!
     // wip, not set up yet.
@@ -158,20 +171,53 @@ public class BossRoom : MonoBehaviour
     [SerializeField]
     private Tile[] ImpassableTiles;
 
-    // to control if the game should look for tile attacks on grid to do calculations
-    // also allows the boss to make one if there isn't an active one yet
-    private bool TileAttackOnGrid = false;
+    // holds all tiles the player can walk on
+    private List<Vector2Int> WalkableTiles = new List<Vector2Int>();
+
+    // and all tiles that tile attacks can currently affect. updated through the game
+    private List<Vector2Int> usableTiles = new List<Vector2Int>();
+
+    [SerializeField]
+    public Vector2Int playerLocation;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // commented out until testing is ready
         GenerateFixedX();
         GenerateMap();
     }
 
     // Update is called once per frame
     void Update() { }
+
+    // methods called by other scripts that aren't related to updating the grid
+
+    // player's location
+    public Vector2Int GetPlayerLocation()
+    {
+        return playerLocation;
+    }
+
+    public void UpdatePlayerLocation(int x, int y)
+    {
+        playerLocation = new Vector2Int(x, y);
+    }
+
+    // movement needs a list of acceptable locations
+    public List<Vector2Int> GetWalkableTiles()
+    {
+        return WalkableTiles;
+    }
+
+    // tile attack stuff
+    public bool TileAttackOnGrid()
+    {
+        if (totalTileAttackLifetime <= 0)
+        {
+            return false;
+        }
+        return true;
+    }
 
     // failsafe in case the X values are set incorrectly
     // feel free to ignore this
@@ -232,7 +278,6 @@ public class BossRoom : MonoBehaviour
             // now loop through each tile in the row
             for (int x = 0; x < RoomWidth; ++x)
             {
-                Debug.Log($"x: {x} y: {y}");
                 roomData[x, y] = new TileData();
                 // set up a tile
                 Tile tile;
@@ -246,15 +291,36 @@ public class BossRoom : MonoBehaviour
                 {
                     tile = PlayableTiles[Random.Range(0, PlayableTiles.Length)];
                     roomData[x, y].SetPassable(true);
+                    WalkableTiles.Add(new Vector2Int(x, y));
                 }
                 // WIP - status will be set at random in a sec
                 // init these under the playable tiles
-                roomData[x, y].SetStatus(null);
+                // roomData[x, y].SetStatus(true);
                 // tiles always start as not highlighted!
                 roomData[x, y].SetHighlighted(false);
 
+                roomData[x, y].SetDefaultTile(tile);
                 roomTilemap.SetTile(new Vector3Int(x, y, 0), tile);
             }
+        }
+
+        // create copy of our walkable tile list to delete things from
+        List<Vector2Int> allowedStatus = new List<Vector2Int>(WalkableTiles);
+
+        // set a bunch of random status tiles
+        for (int placedStatus = 0; placedStatus < NumStatusTiles; placedStatus++)
+        {
+            int index = Random.Range(0, allowedStatus.Count);
+            int x = allowedStatus[index].x;
+            int y = allowedStatus[index].y;
+
+            Vector3Int location = new Vector3Int(x, y, 0);
+
+            roomData[x, y].SetStatus(true);
+            roomData[x, y].SetDefaultTile(statusTile);
+            roomTilemap.SetTile(location, statusTile);
+
+            allowedStatus.RemoveAt(index);
         }
     }
 
@@ -263,13 +329,15 @@ public class BossRoom : MonoBehaviour
     // changes the room sprites accordingly
     public void RefreshRoom(TileAttack newTileAttack = null)
     {
+        roomTilemap = GetComponentInChildren<Tilemap>();
+
         // collects all playable tile locations
-        // they must both be passable and not affected by a tileattack
+        // they must both be passable and not affected by a tileattack or status
         List<Vector2Int> allowableLocations = new List<Vector2Int>();
         // and the locations to update
         List<Vector2Int> updateLocations = new List<Vector2Int>();
 
-        int updatedLifetime = 0;
+        int localLifetime = 0;
 
         bool isNewTileAttack = true;
         if (newTileAttack is null)
@@ -281,57 +349,62 @@ public class BossRoom : MonoBehaviour
         bool doesSpread = false;
 
         // grid doesn't need to be updated
-        if (!this.TileAttackOnGrid && !isNewTileAttack)
+        if (!this.TileAttackOnGrid() && !isNewTileAttack)
         {
             return;
         }
 
-        // start updating the grid by looping through/checking all the grid data
-        for (int y = 0; y < RoomHeight; ++y)
+        // update the title attack on the grid's total lifetime
+        if (TileAttackOnGrid())
         {
-            // stop the loop early if it's an impassable row, nothing to change
-            if (NumPlayableXTiles[y] == 0)
+            totalTileAttackLifetime -= 1;
+        }
+
+        // start updating the grid by looping through/checking all the grid data
+        // only for the walkable tiles
+        foreach (Vector2Int location in WalkableTiles)
+        {
+            int x = location.x;
+            int y = location.y;
+            // so we can access the tile's information
+            TileData tileData = roomData[x, y];
+            // and for sprite updating
+            Vector3Int spriteLocation = new Vector3Int(x, y, 0);
+
+            // swap the highlighted tiles to one that has an attack
+            if (tileData.IsHighlighted())
             {
+                tileData.SetHighlighted(false);
+                updateLocations.Add(new Vector2Int(x, y));
+                // sprite processing
+                roomTilemap.SetTile(spriteLocation, newTileAttack.GetTileSprite());
                 continue;
             }
 
-            for (int x = 0; x < RoomWidth; ++x)
+            // active tile attack updating
+            if (TileAttackOnGrid())
             {
-                // so we can access the tile's information
-                TileData tileData = roomData[x, y];
-
-                // if it's an impassable tile, there is nothing to update
-                if (!tileData.IsPassable())
-                {
-                    continue;
-                }
-
-                // swap the highlighted tiles to one that has an attack
-                if (tileData.IsHighlighted())
-                {
-                    tileData.SetHighlighted(false);
-                    updateLocations.Add(new Vector2Int(x, y));
-                    continue;
-                }
-
-                // active tile attack updating
                 if (tileData.HasTileAttack())
                 {
                     updateLocations.Add(new Vector2Int(x, y));
                     // reduce the lifetime
-                    // then, if the tile attack is over, stop this loop
-                    // yes it's going to set the tileattackongrid multiple times idc
+                    // if the tile attack is no longer active, this location is free again
                     tileData.ReduceTileAttackLifetime();
-                    if (!tileData.HasTileAttack())
+                    if (tileData.HasTileAttack())
                     {
-                        this.TileAttackOnGrid = false;
-                        continue;
+                        if (tileData.GetTileAttack().GetDoesSpread())
+                        {
+                            doesSpread = true;
+                            localLifetime = tileData.GetCopyLifetime();
+                        }
                     }
-                    // this tile will be free to add a new attack to in a moment
-                    if (tileData.GetTileAttack().GetDoesSpread())
+                    else
                     {
-                        doesSpread = true;
-                        updatedLifetime = tileData.GetLifetime();
+                        if (tileData.GetTileAttack().GetDoesSpread())
+                        {
+                            doesSpread = true;
+                        }
+                        roomTilemap.SetTile(spriteLocation, tileData.GetDefaultTile());
                         allowableLocations.Add(new Vector2Int(x, y));
                     }
                 }
@@ -339,6 +412,15 @@ public class BossRoom : MonoBehaviour
                 {
                     // this tile will be free to add an attack to
                     allowableLocations.Add(new Vector2Int(x, y));
+                }
+            }
+            else
+            {
+                if (tileData.HasTileAttack())
+                {
+                    // remove the tile attack
+                    updateLocations.Add(new Vector2Int(x, y));
+                    tileData.RemoveTileAttack();
                 }
             }
         }
@@ -370,20 +452,23 @@ public class BossRoom : MonoBehaviour
                         continue;
                     }
 
-                    roomData[x, y].SetTileAttack(newTileAttack, updatedLifetime, false);
+                    roomData[x, y].SetTileAttack(newTileAttack, localLifetime, false);
                     // WIP - sprite processing here
                     // note - make a method for this, it's called 3 times
                 }
             }
             else
             {
-                this.TileAttackOnGrid = false;
+                totalTileAttackLifetime = 0;
             }
         }
         else if (isNewTileAttack)
         {
             List<Vector2Int> newAffectedTiles = new List<Vector2Int>();
-            this.TileAttackOnGrid = true;
+            totalTileAttackLifetime = newTileAttack.GetTotalLifetime();
+            int LocalTileAttackLifetime = newTileAttack.GetLifetime();
+            // WIP - replace with the highlight tiles
+            Tile newSprite = newTileAttack.GetTileSprite();
 
             // pass the allowed tiles to the tile attack handler
             // collect the affected tiles
@@ -404,29 +489,11 @@ public class BossRoom : MonoBehaviour
                 {
                     continue;
                 }
-                roomData[x, y]
-                    .SetTileAttack(newTileAttack, newTileAttack.GetTileAttackDuration(), true);
-                // WIP - sprite processing here
+                roomData[x, y].SetTileAttack(newTileAttack, LocalTileAttackLifetime, true);
+                // WIP - sprite processing
                 // these would be highlighted tiles!
-            }
-        }
-
-        // process updating the tiles to match their sprites
-        // WIP - need to know how to do this first
-
-        // loop through all updatable tiles
-        if (updateLocations.Count > 0)
-        {
-            foreach (Vector2Int location in updateLocations)
-            {
-                int x = location.x;
-                int y = location.y;
-
-                if (roomData[x, y] is null)
-                {
-                    continue;
-                }
-                // WIP - sprite processing here
+                Vector3Int spriteLocation = new Vector3Int(x, y, 0);
+                roomTilemap.SetTile(spriteLocation, newSprite);
             }
         }
     }
