@@ -112,6 +112,21 @@ public class BossRoom : MonoBehaviour
             return this.tileAttack;
         }
 
+        public bool isRowOrWave()
+        {
+            string shape = tileAttack.GetShape();
+            if (
+                shape == "row"
+                || shape == "double row"
+                || shape == "wave"
+                || shape == "double wave"
+            )
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void ReduceTileAttackLifetime()
         {
             this.tileAttackLifetime -= 1;
@@ -179,6 +194,11 @@ public class BossRoom : MonoBehaviour
 
     // and all tiles that tile attacks can currently affect. updated through the game
     private List<Vector2Int> usableTiles = new List<Vector2Int>();
+
+    // where the boss is standing
+    // MUST BE INITIALIZED IN THE EDITOR OR IT'LL BREAK
+    [SerializeField]
+    private List<Vector2Int> BossTiles = new List<Vector2Int>();
 
     [SerializeField]
     public Vector2Int playerLocation;
@@ -292,7 +312,6 @@ public class BossRoom : MonoBehaviour
 
         for (int y = 0; y < RoomHeight; ++y)
         {
-                
             // controls if the entire row should be impassable
             bool impassableRow = false;
             if (NumPlayableXTiles[y] == 0)
@@ -320,11 +339,10 @@ public class BossRoom : MonoBehaviour
                 rightX = RoomWidth - NumSideImpassable;
             }
 
-            
             // debugging ignore
-            Debug.Log($"Row {y}: leftX={leftX}, rightX={rightX}, NumPlayableXTiles={NumPlayableXTiles[y]}");
-
-
+            Debug.Log(
+                $"Row {y}: leftX={leftX}, rightX={rightX}, NumPlayableXTiles={NumPlayableXTiles[y]}"
+            );
 
             // now loop through each tile in the row
             for (int x = 0; x < RoomWidth; ++x)
@@ -340,13 +358,22 @@ public class BossRoom : MonoBehaviour
                 }
                 else
                 {
+                    Vector2Int location = new Vector2Int(x, y);
+
                     tile = PlayableTiles[Random.Range(0, PlayableTiles.Length)];
-                    roomData[x, y].SetPassable(true);
-                    WalkableTiles.Add(new Vector2Int(x, y));
+
+                    // check if it's a boss tile, since these are impassable
+                    if (BossTiles.contains(location))
+                    {
+                        roomData[x, y].SetPassable(false);
+                    }
+                    else
+                    {
+                        roomData[x, y].SetPassable(true);
+                        WalkableTiles.Add(location);
+                    }
                 }
-                // WIP - status will be set at random in a sec
-                // init these under the playable tiles
-                // roomData[x, y].SetStatus(true);
+
                 // tiles always start as not highlighted!
                 roomData[x, y].SetHighlighted(false);
 
@@ -372,58 +399,6 @@ public class BossRoom : MonoBehaviour
             roomTilemap.SetTile(location, statusTile);
 
             allowedStatus.RemoveAt(index);
-        }
-
-        // Makes impassable tiles that the boss stands on
-        // X = 11 to 16
-        // Y == Down to 17
-        Vector2Int[] bossTiles = new Vector2Int[] 
-        {
-            new Vector2Int(11, 21),
-            new Vector2Int(12, 21),
-            new Vector2Int(13, 21),
-            new Vector2Int(14, 21),
-            new Vector2Int(15, 21),
-            new Vector2Int(16, 21),
-
-            new Vector2Int(11, 20),
-            new Vector2Int(12, 20),
-            new Vector2Int(13, 20),
-            new Vector2Int(14, 20),
-            new Vector2Int(15, 20),
-            new Vector2Int(16, 20),
-
-            new Vector2Int(11, 19),
-            new Vector2Int(12, 19),
-            new Vector2Int(13, 19),
-            new Vector2Int(14, 19),
-            new Vector2Int(15, 19),
-            new Vector2Int(16, 19),
-
-            new Vector2Int(11, 18),
-            new Vector2Int(12, 18),
-            new Vector2Int(13, 18),
-            new Vector2Int(14, 18),
-            new Vector2Int(15, 18),
-            new Vector2Int(16, 18),
-
-            new Vector2Int(11, 17),
-            new Vector2Int(12, 17),
-            new Vector2Int(13, 17),
-            new Vector2Int(14, 17),
-            new Vector2Int(15, 17),
-            new Vector2Int(16, 17),
-        };
-
-        foreach (Vector2Int tile in bossTiles)
-        {
-            int x = tile.x;
-            int y = tile.y;
-
-            roomData[x, y].SetPassable(false);
-            roomData[x, y].SetDefaultTile(bossPlatformTile);
-            roomTilemap.SetTile(new Vector3Int(x, y, 0), bossPlatformTile);
-            WalkableTiles.Remove(tile);
         }
     }
 

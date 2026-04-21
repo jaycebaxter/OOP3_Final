@@ -84,6 +84,11 @@ public class TileAttack : Attack
         return this.totalTileAttackLifetime;
     }
 
+    public string GetShape()
+    {
+        return this.shape;
+    }
+
     public int GetInitialTilesAffected()
     {
         return this.initialTilesAffected;
