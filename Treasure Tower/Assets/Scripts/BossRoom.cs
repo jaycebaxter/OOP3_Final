@@ -364,7 +364,7 @@ public class BossRoom : MonoBehaviour
                     tile = PlayableTiles[Random.Range(0, PlayableTiles.Length)];
 
                     // check if it's a boss tile, since these are impassable
-                    if (BossTiles.contains(location))
+                    if (BossTiles.Contains(location))
                     {
                         roomData[x, y].SetPassable(false);
                     }
