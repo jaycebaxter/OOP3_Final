@@ -256,7 +256,7 @@ public class BossRoom : MonoBehaviour
             damage += tileData.GetTileAttack().GetDamage();
         }
 
-        if (tileData.HasStatus())
+        if (TileHasStatus(location))
         {
             // have to retrieve the script from the object first
             Status status = GetComponent<Status>();
@@ -264,6 +264,13 @@ public class BossRoom : MonoBehaviour
         }
 
         return damage;
+    }
+
+    // run only if tilehasstatus is true
+    public Status InflictStatus()
+    {
+        Status status = GetComponent<Status>();
+        return status;
     }
 
     public bool TileHasStatus(Vector2Int location)
