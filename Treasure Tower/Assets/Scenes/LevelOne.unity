@@ -761,7 +761,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4089193477688679428, guid: 09f2e6fc26c22ac46a21551fd51101b0, type: 3}
+  m_Sprite: {fileID: -4260174355691983611, guid: 3ce0a9a1b1f77f846aec3991fa506d74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -879,6 +879,7 @@ MonoBehaviour:
   ImpassableTiles:
   - {fileID: 11400000, guid: f955cb7026dd184d7b732832ddb80435, type: 2}
   bossPlatformTile: {fileID: 11400000, guid: df4abe7784fe61a14b4e6dd9cab91188, type: 2}
+  BossTiles: []
   playerLocation: {x: 13, y: 4}
 --- !u!114 &1498708940
 MonoBehaviour:
