@@ -7,6 +7,7 @@ public class CharacterManager : MonoBehaviour
 {
     public Character[] characterList;
     public Character selectedCharacter;
+    public int selectedIndex;
 
     public static CharacterManager Instance { get; private set; }
 
@@ -18,15 +19,11 @@ public class CharacterManager : MonoBehaviour
             Instance = this;
             // Prevents gameObjects from being deleted when a new scene is loaded
             DontDestroyOnLoad(gameObject);
-
-            Debug.Log("CHARACTER MANAGER");
-            Debug.Log("Instance ID - Character Manager: " + Instance.GetEntityId());
-            Debug.Log("Character count: " + characterList.Length);
         }
         // Deletes instance if theres more than one instance
         else if (Instance != this)
         {
-            // If the character list has characters in the list is saved
+            // If the character list has characters then list is saved
             // Prevents character list from disappearing when reloading a prev scene
             if (characterList != null)
             {
@@ -37,21 +34,30 @@ public class CharacterManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+
     }
 
-    public void Start()
-    {
-        // By default selected character is the Owl
-        if (selectedCharacter == null)
-        {
-            selectedCharacter = characterList[0];
-            Debug.Log("Character Selected - Manager: " + selectedCharacter.GetName());
-        }
-    }
+    //public void Start()
+    //{
+    //    // By default selected character is the Owl
+    //    if (selectedCharacter == null)
+    //    {
+    //        selectedCharacter = characterList[0];
 
-    public void setCharacter(Character player)
+    //    }
+    //}
+
+    public void SetCharacter(int playerIndex)
     {
-        selectedCharacter = player;
+        //selectedCharacter = characterList[playerIndex];  
+        //Debug.Log("SET CHARACTER FUNCTION");
+        //Debug.Log("Player Name: " + selectedCharacter.GetName());
+
+        //Debug.Log("List: " + characterList.Length);
+        //Debug.Log("Index used: " + playerIndex);
+
+        selectedIndex = playerIndex;
+
     }
 
 

@@ -25,17 +25,6 @@ public class ChangeScene : MonoBehaviour
         }
         else
         {
-            foreach (var character in CharacterManager.Instance.characterList)
-            {
-                Debug.Log("Character Name - Button: " + character.GetName());
-            }
-
-            //for (int i = 0; i < CharacterManager.Instance.characterList.Length; i++)
-            //{
-            //    Debug.Log($"Index BUTTON {i}: {CharacterManager.Instance.characterList[i].GetName()}");
-            //}
-
-
             SceneManager.LoadScene(prevScene);
         }
 

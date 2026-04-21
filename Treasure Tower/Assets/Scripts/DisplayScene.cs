@@ -15,16 +15,30 @@ public class DisplayScene : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Debug.Log("DISPLAY SCENE");
+        Debug.Log("List null? " + (CharacterManager.Instance.characterList == null));
+        Debug.Log("List length: " + CharacterManager.Instance.characterList?.Length);
+
         var manager = CharacterManager.Instance;
-        var player = manager.selectedCharacter;
+        var player = manager.characterList[manager.selectedIndex];
+
+        //if (manager == null || player == null)
+        //{
+            
+        //    Debug.Log("No character selected.");
+        //    return;
+        //}
+
+
+
 
         //Debug.Log("DISPLAY SCENE");
-        //Debug.Log("Manager Exist!");
-        //Debug.Log("Instance ID - Character Manager: " + manager.GetEntityId());
+        ////Debug.Log("Manager Exist!");
+        ////Debug.Log("Instance ID - Character Manager: " + manager.GetEntityId());
         //Debug.Log("Character List Length: " + manager.characterList.Length);
         //Debug.Log("Selected character: " + player.GetName());
 
-        
+
 
         //foreach (var character in manager.characterList)
         //{

@@ -6,37 +6,33 @@ public class CharacterButton : MonoBehaviour
     [SerializeField]
     // Provide character index
     private int characterIndex;
-    private int newScene = 2;
+    public int newScene;
     
 
     public void OnCharacterClick()
     {
+        Debug.Log("Manager BEFORE load: " + CharacterManager.Instance.GetEntityId());
         var manager = CharacterManager.Instance;
 
-        if (characterIndex < 0 || characterIndex > manager.characterList.Length)
+        if (characterIndex < 0 || characterIndex >= manager.characterList.Length)
         {
             Debug.LogError("Character Index invalid");
             return;
         }
-        else
-        {
-            Debug.Log("BUTTON CLICKED");
 
 
 
-            // Store the characters info in selected Character (from character manager)
-            manager.selectedCharacter = manager.characterList[characterIndex];
+        Debug.Log("BUTTON CLICKED");
 
-            //if (manager.selectedCharacter == null)
-            //{
-            //    Debug.Log("Chracter is null");
-            //    return;
-            //}
+        // Store the characters info in selected Character (from character manager)
+        manager.SetCharacter(characterIndex);
 
-            Debug.Log("Character Name CHARACTER BUTTON: " + manager.selectedCharacter.GetName());
-            //Debug.Log("Instance ID - Button Clicked: " + manager.GetEntityId());
+        //Debug.Log("CharacterButton Instance ID: " + manager.GetEntityId());
+        //Debug.Log("Character Name: " + manager.selectedCharacter.GetName());
+        //Debug.Log("Clicked index: " + characterIndex);
 
-            SceneManager.LoadScene(newScene);
-        }
+        //Debug.Log("Character Name CHARACTER BUTTON: " + manager.selectedCharacter.GetName());
+        SceneManager.LoadScene(newScene);
+
     }
 }
