@@ -266,13 +266,6 @@ public class BossRoom : MonoBehaviour
         return damage;
     }
 
-    // run only if tilehasstatus is true
-    public Status InflictStatus()
-    {
-        Status status = GetComponent<Status>();
-        return status;
-    }
-
     public bool TileHasStatus(Vector2Int location)
     {
         int x = location.x;
@@ -285,6 +278,7 @@ public class BossRoom : MonoBehaviour
         return false;
     }
 
+    // return only if tile has status is true
     public Status GetRoomStatus()
     {
         return GetComponent<Status>();
