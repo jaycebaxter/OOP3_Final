@@ -242,11 +242,13 @@ public class TileAttack : Attack
 
     /// <summary>
     /// calculates the spreading of the tiles and assigns new lifetimes to them
-    /// pass in the tile itself, the current lifetime on the tile, and the available tiles to spread to
+    /// pass in the tiles itself, the current lifetime on the tiles, and the available tiles to spread to
     /// also needs the shape and spread direction
+    /// seperated by x, y because it's just easier to get the lowest/highest values
     /// </summary>
     public (List<Vector2Int>, List<int>) DoTileAttackSpread(
-        Vector2Int tile,
+        List<int> xTiles,
+        List<int> yTiles,
         int currentLifetime,
         List<Vector2Int> availableTiles
     )

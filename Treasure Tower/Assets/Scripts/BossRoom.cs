@@ -340,11 +340,6 @@ public class BossRoom : MonoBehaviour
                 rightX = RoomWidth - NumSideImpassable;
             }
 
-            // debugging ignore
-            Debug.Log(
-                $"Row {y}: leftX={leftX}, rightX={rightX}, NumPlayableXTiles={NumPlayableXTiles[y]}"
-            );
-
             // now loop through each tile in the row
             for (int x = 0; x < RoomWidth; ++x)
             {
@@ -415,6 +410,8 @@ public class BossRoom : MonoBehaviour
         List<Vector2Int> allowableLocations = new List<Vector2Int>();
         // and the locations to update
         List<Vector2Int> updateLocations = new List<Vector2Int>();
+        // then tiles that are spreading
+        List<Vector2Int> spreadLocations = new List<Vector2Int>();
 
         int localLifetime = 0;
 
@@ -465,24 +462,17 @@ public class BossRoom : MonoBehaviour
             {
                 if (tileData.HasTileAttack())
                 {
-                    updateLocations.Add(new Vector2Int(x, y));
+                    if (tileData.GetTileAttack().GetDoesSpread())
+                    {
+                        doesSpread = true;
+                        spreadLocations.Add(new Vector2Int(x, y));
+                    }
                     // reduce the lifetime
                     // if the tile attack is no longer active, this location is free again
                     tileData.ReduceTileAttackLifetime();
-                    if (tileData.HasTileAttack())
+                    // reset the sprite and allow tile attacks here
+                    if (!tileData.HasTileAttack())
                     {
-                        if (tileData.GetTileAttack().GetDoesSpread())
-                        {
-                            doesSpread = true;
-                            localLifetime = tileData.GetCopyLifetime();
-                        }
-                    }
-                    else
-                    {
-                        if (tileData.GetTileAttack().GetDoesSpread())
-                        {
-                            doesSpread = true;
-                        }
                         roomTilemap.SetTile(spriteLocation, tileData.GetDefaultTile());
                         allowableLocations.Add(new Vector2Int(x, y));
                     }

@@ -27,17 +27,9 @@ public class Game : MonoBehaviour
 
     void Start()
     {
-        movement = playerObject.GetComponent<Movement>();
-        boss = bossObject.GetComponent<Boss>();
-        turnManager = new TurnManager();
+        SetupGame();
 
-        boss.Init(turnManager);
-
-        // spawns player at start tile
-        Vector2Int startTile = room.GetPlayerLocation();
-        SnapPlayerToTile(startTile);
-
-        StartPlayerTurn();
+        //boss.Init(turnManager);
     }
 
     void Update()
@@ -95,6 +87,18 @@ public class Game : MonoBehaviour
         // end movement and turn after attacking
         movement.EndTurn();
         OnMovementFinished();
+    }
+
+    public void SetupGame()
+    {
+        movement = playerObject.GetComponent<Movement>;
+        boss = bossObject.GetComponent<Boss>;
+        turnManager = new TurnManager();
+
+        Vector2Int startTile = room.GetPlayerLocation();
+        SnapPlayerToTile(startTile);
+
+        StartPlayerTurn();
     }
 
     void StartPlayerTurn()
