@@ -91,8 +91,8 @@ public class Game : MonoBehaviour
 
     public void SetupGame()
     {
-        movement = playerObject.GetComponent<Movement>;
-        boss = bossObject.GetComponent<Boss>;
+        movement = playerObject.GetComponent<Movement>();
+        boss = bossObject.GetComponent<Boss>();
         turnManager = new TurnManager();
 
         Vector2Int startTile = room.GetPlayerLocation();
