@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterButton
   characterIndex: 3
-  newScene: 2
+  newScene: 3
 --- !u!1 &313992217
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterButton
   characterIndex: 1
-  newScene: 2
+  newScene: 3
 --- !u!1 &1129616788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,7 +1088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterButton
   characterIndex: 0
-  newScene: 2
+  newScene: 3
 --- !u!1 &1528855268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,6 +1124,7 @@ MonoBehaviour:
   - {fileID: 1634595148}
   - {fileID: 295884636}
   selectedCharacter: {fileID: 0}
+  selectedIndex: 0
 --- !u!4 &1528855270
 Transform:
   m_ObjectHideFlags: 0
@@ -1313,7 +1314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterButton
   characterIndex: 2
-  newScene: 2
+  newScene: 3
 --- !u!1 &1686427861
 GameObject:
   m_ObjectHideFlags: 0
